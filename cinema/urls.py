@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from cinema.views import (
@@ -7,7 +7,6 @@ from cinema.views import (
     CinemaHallGenericViewSet,
     MovieModelViewSet
 )
-
 
 app_name = "cinema"
 
@@ -18,5 +17,3 @@ urlpatterns = [
     path("genres/", GenreAPIView.as_view(), name="genre"),
     path("actors/", ActorsGenericAPIView.as_view(), name="actors"),
 ]
-
-

@@ -5,7 +5,12 @@ from rest_framework import status
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
 from cinema.models import Genre, Actor, CinemaHall, Movie
-from cinema.serializers import GenreSerializer, ActorSerializer, CinemaHallSerializer, MovieSerializer
+from cinema.serializers import (
+    GenreSerializer,
+    ActorSerializer,
+    CinemaHallSerializer,
+    MovieSerializer
+)
 
 
 class GenreAPIView(APIView):
@@ -28,7 +33,7 @@ class ActorsGenericAPIView(GenericAPIView):
     lookup_field = "pk"
 
     def get(self, request, *args, **kwargs):
-        queryset  = self.get_queryset()
+        queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -49,7 +54,11 @@ class ActorsGenericAPIView(GenericAPIView):
 
     def patch(self, request, *args, **kwargs):
         actor = self.get_object()
-        serializer = self.get_serializer(actor, data=request.data, partial=True)
+        serializer = self.get_serializer(
+            actor,
+            data=request.data,
+            partial=True
+        )
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
